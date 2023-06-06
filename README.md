@@ -1,5 +1,6 @@
 ## Installation
 安装node >= v16.19.1版本
+npm install -g pm2
 
 ```bash
 $ npm install
@@ -14,8 +15,8 @@ $ npm run start
 # watch mode
 $ npm run start:dev
 
-# production mode
-$ npm run start:prod
+# 生产环境部署
+$ npm run pm2start:prod
 ```
 
 ## Test
