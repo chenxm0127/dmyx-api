@@ -1,5 +1,5 @@
 ## Installation
-安装node >= v16.19.1版本
+安装node >= v16.19.1版本  
 npm install -g pm2
 
 ```bash
