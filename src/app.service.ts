@@ -9,19 +9,19 @@ import {
 } from './type';
 
 const hostInfo = {
-  usecode001: {
+  usercode001: {
     roomId: 'gameroom1',
     openId: 'opid001',
     userName: '游戏主播1',
     avatarUrl: '',
   },
-  usecode002: {
+  usercode002: {
     roomId: 'gameroom2',
     openId: 'opid002',
     userName: '游戏主播2',
     avatarUrl: '',
   },
-  usecode003: {
+  usercode003: {
     roomId: 'gameroom3',
     openId: 'opid003',
     userName: '游戏主播3',
@@ -179,7 +179,7 @@ export class AppService {
       err_msg: 'sucess',
       logid: new Date().getTime().toString(),
       data: {
-        status: 2,
+        status: 1,
       },
     };
   }
@@ -198,7 +198,7 @@ export class AppService {
         },
       };
     }
-    if (!['usecode001', 'usecode002', 'usecode003'].includes(user_code)) {
+    if (!['usercode001', 'usercode002', 'usercode003'].includes(user_code)) {
       return {
         err_no: -1,
         err_msg: 'unkonw error',
