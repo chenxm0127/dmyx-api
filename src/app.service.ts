@@ -135,8 +135,8 @@ export class AppService {
           msg_id: generateMessageId(),
           openid: 'opid002',
           gift_id: '1001' /*三种礼物类型1001、1002、1003*/,
-          gift_num: 123,
-          gift_value: 10000,
+          gift_num: 50,
+          gift_value: 500,
           avatar_url: '',
           nickname: '游戏主播2',
           timestamp: new Date().getTime(),
@@ -161,7 +161,7 @@ export class AppService {
       logid: new Date().getTime().toString(),
       data: {
         page_num: 1,
-        total_count: 100,
+        total_count: 1,
         data_list: [
           // 当页的数据列表
           {
