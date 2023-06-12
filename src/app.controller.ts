@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Header } from '@nestjs/common';
+import { Controller, Get, Post, Body, Header, Query } from '@nestjs/common';
 import { AppService } from './app.service';
 import { TaskType } from './type';
 
@@ -42,15 +42,20 @@ export class AppController {
   /**
    * 失败消息数据获取
    */
-  @Post('live_data/fail_data/get')
-  getFailedData(@Body() req) {
-    const { roomid, appid, msg_type, page_size, page_num } = req;
+  @Get('live_data/fail_data/get')
+  getFailedData(
+    @Query('roomid') roomid: string,
+    @Query('appid') appid: string,
+    @Query('msg_type') msg_type: string,
+    @Query('page_num') page_num: number,
+    @Query('page_size') page_size: number,
+  ) {
     return this.appService.getFailedData({
       roomid,
       appid,
       msg_type,
-      page_size,
       page_num,
+      page_size,
     });
   }
 

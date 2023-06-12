@@ -1,4 +1,5 @@
 import { Injectable } from '@nestjs/common';
+import { generateMessageId } from './util';
 import {
   TaskType,
   TaskDataType,
@@ -12,19 +13,19 @@ const hostInfo = {
     roomId: 'gameroom1',
     openId: 'opid001',
     userName: '游戏主播1',
-    avatarUrl: '-',
+    avatarUrl: '',
   },
   usecode002: {
     roomId: 'gameroom2',
     openId: 'opid002',
     userName: '游戏主播2',
-    avatarUrl: '-',
+    avatarUrl: '',
   },
   usecode003: {
     roomId: 'gameroom3',
     openId: 'opid003',
     userName: '游戏主播3',
-    avatarUrl: '-',
+    avatarUrl: '',
   },
 };
 
@@ -97,14 +98,33 @@ export class AppService {
   getFailedData(_taskData: TaskDataType) {
     console.log(_taskData);
     let payload: any = '';
+    if (!_taskData.appid || !_taskData.msg_type || !_taskData.roomid) {
+      return {
+        err_no: 40023,
+        err_msg: 'Required Parameters Are Absent',
+        logid: new Date().getTime().toString(),
+        data: {},
+      };
+    }
+    if (
+      (_taskData.page_num && isNaN(Number(_taskData.page_num))) ||
+      (_taskData.page_size && isNaN(Number(_taskData.page_size)))
+    ) {
+      return {
+        err_no: 10011,
+        err_msg: 'Request params error',
+        logid: new Date().getTime().toString(),
+        data: {},
+      };
+    }
     if (_taskData.msg_type === 'live_comment') {
       payload = [
         {
-          msgid: '123456',
-          userid: 1104,
+          msg_id: generateMessageId(),
+          openid: 'opid001',
           content: '你好啊',
-          avatarurl: 'test url',
-          nickname: '游戏主播',
+          avatar_url: '',
+          nickname: '游戏主播1',
           timestamp: new Date().getTime(),
         },
       ];
@@ -112,13 +132,13 @@ export class AppService {
     if (_taskData.msg_type === 'live_gift') {
       payload = [
         {
-          msgid: '123456',
-          userid: 1104,
-          giftid: '1001' /*三种礼物类型1001、1002、1003*/,
-          giftnum: 123,
-          giftvalue: 10000,
-          avatarurl: 'test url',
-          nickname: '游戏主播',
+          msg_id: generateMessageId(),
+          openid: 'opid002',
+          gift_id: '1001' /*三种礼物类型1001、1002、1003*/,
+          gift_num: 123,
+          gift_value: 10000,
+          avatar_url: '',
+          nickname: '游戏主播2',
           timestamp: new Date().getTime(),
         },
       ];
@@ -126,11 +146,11 @@ export class AppService {
     if (_taskData.msg_type === 'live_like') {
       payload = [
         {
-          msgid: '123456',
-          userid: 1104,
-          likenum: 123,
-          avatarurl: 'test url',
-          nickname: '游戏主播',
+          msg_id: generateMessageId(),
+          openid: 'opid003',
+          like_num: '123',
+          avatar_url: '',
+          nickname: '游戏主播3',
           timestamp: new Date().getTime(),
         },
       ];
