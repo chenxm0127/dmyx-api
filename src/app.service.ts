@@ -67,7 +67,7 @@ export class AppService {
     }
     return {
       err_no: 0,
-      err_msg: 'ok',
+      err_msg: 'sucess',
       data: {
         access_token: '12345678901234567890',
         expires_in: 7200,
@@ -78,7 +78,7 @@ export class AppService {
     console.log(_taskReq);
     return {
       err_no: 0,
-      err_msg: 'ok',
+      err_msg: 'sucess',
       logid: new Date().getTime().toString(),
       data: {
         task_id: '1245345',
@@ -89,7 +89,7 @@ export class AppService {
     console.log(_taskReq);
     return {
       err_no: 0,
-      err_msg: 'ok',
+      err_msg: 'sucess',
       logid: new Date().getTime().toString(),
       data: {},
     };
@@ -134,7 +134,7 @@ export class AppService {
     }
     return {
       err_no: 0,
-      err_msg: 'ok',
+      err_msg: 'sucess',
       logid: new Date().getTime().toString(),
       data: {
         page_num: 1,
@@ -153,7 +153,7 @@ export class AppService {
     console.log(_taskReq);
     return {
       err_no: 0,
-      err_msg: 'ok',
+      err_msg: 'sucess',
       logid: new Date().getTime().toString(),
       data: {
         status: 2,
@@ -190,7 +190,7 @@ export class AppService {
     }
     return {
       err_no: 0,
-      err_msg: 'ok',
+      err_msg: 'sucess',
       logid: new Date().getTime().toString(),
       data: hostInfo[user_code],
     };
@@ -199,7 +199,7 @@ export class AppService {
     console.log(_livingData);
     return {
       err_no: 0,
-      err_msg: 'ok',
+      err_msg: 'sucess',
       logid: new Date().getTime().toString(),
       data: {},
     };
