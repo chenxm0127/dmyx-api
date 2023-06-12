@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Header } from '@nestjs/common';
 import { AppService } from './app.service';
 import { TaskType } from './type';
 
@@ -15,6 +15,7 @@ export class AppController {
    * 获取用户token
    */
   @Post('live_data/token/get')
+  @Header('Content-Type', 'application/json')
   getAccessToken(@Body() req) {
     const { appid, secret, grant_type } = req;
     return this.appService.getAccessToken({ appid, secret, grant_type });
