@@ -79,6 +79,7 @@ export class AppService {
     return {
       err_no: 0,
       err_msg: 'ok',
+      logid: new Date().getTime().toString(),
       data: {
         task_id: '1245345',
       },
@@ -89,6 +90,7 @@ export class AppService {
     return {
       err_no: 0,
       err_msg: 'ok',
+      logid: new Date().getTime().toString(),
       data: {},
     };
   }
@@ -133,6 +135,7 @@ export class AppService {
     return {
       err_no: 0,
       err_msg: 'ok',
+      logid: new Date().getTime().toString(),
       data: {
         page_num: 1,
         total_count: 100,
@@ -151,6 +154,7 @@ export class AppService {
     return {
       err_no: 0,
       err_msg: 'ok',
+      logid: new Date().getTime().toString(),
       data: {
         status: 2,
       },
@@ -162,6 +166,7 @@ export class AppService {
       return {
         err_no: 40015,
         err_msg: 'bad appid',
+        logid: new Date().getTime(),
         data: {
           openId: '',
           userName: '',
@@ -174,6 +179,7 @@ export class AppService {
       return {
         err_no: -1,
         err_msg: 'unkonw error',
+        logid: new Date().getTime(),
         data: {
           openId: '',
           userName: '',
@@ -185,6 +191,7 @@ export class AppService {
     return {
       err_no: 0,
       err_msg: 'ok',
+      logid: new Date().getTime().toString(),
       data: hostInfo[user_code],
     };
   }
@@ -193,6 +200,7 @@ export class AppService {
     return {
       err_no: 0,
       err_msg: 'ok',
+      logid: new Date().getTime().toString(),
       data: {},
     };
   }
