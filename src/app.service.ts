@@ -105,6 +105,7 @@ export class AppService {
           content: '你好啊',
           avatarurl: 'test url',
           nickname: '游戏主播',
+          timestamp: new Date().getTime(),
         },
       ];
     }
@@ -118,6 +119,7 @@ export class AppService {
           giftvalue: 10000,
           avatarurl: 'test url',
           nickname: '游戏主播',
+          timestamp: new Date().getTime(),
         },
       ];
     }
@@ -129,6 +131,7 @@ export class AppService {
           likenum: 123,
           avatarurl: 'test url',
           nickname: '游戏主播',
+          timestamp: new Date().getTime(),
         },
       ];
     }
@@ -143,7 +146,7 @@ export class AppService {
           // 当页的数据列表
           {
             room_id: '12345', // string类型，消息的房间id
-            payload, // string类型， 对应推送协议中的payload字符串，需要unmarshal
+            payload: JSON.stringify(payload), // string类型， 对应推送协议中的payload字符串，需要unmarshal
           },
         ],
       },
