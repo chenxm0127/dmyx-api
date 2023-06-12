@@ -14,11 +14,42 @@ export class AppService {
   }
   getAccessToken(tokenReq: TokenType) {
     console.log(tokenReq);
+    if (tokenReq.appid !== '1234567890abcdef') {
+      return {
+        err_no: 40015,
+        err_msg: 'bad appid',
+        data: {
+          access_token: '',
+          expires_in: 0,
+        },
+      };
+    }
+    if (tokenReq.secret !== 'agorasecret') {
+      return {
+        err_no: 40017,
+        err_msg: 'bad secret',
+        data: {
+          access_token: '',
+          expires_in: 0,
+        },
+      };
+    }
+    if (tokenReq.grant_type !== 'client_credential') {
+      return {
+        err_no: 40020,
+        err_msg: 'bad client_credential',
+        data: {
+          access_token: '',
+          expires_in: 0,
+        },
+      };
+    }
     return {
       err_no: 0,
       err_msg: 'ok',
       data: {
-        access_token: 'dfjestrkenng12398',
+        access_token: '12345678901234567890',
+        expires_in: 7200,
       },
     };
   }
