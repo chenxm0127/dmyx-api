@@ -62,9 +62,12 @@ export class AppController {
   /**
    * 获取任务状态
    */
-  @Post('live_data/task/get')
-  getTaskStatus(@Body() req) {
-    const { roomid, appid, msg_type } = req;
+  @Get('live_data/task/get')
+  getTaskStatus(
+    @Query('roomid') roomid: string,
+    @Query('appid') appid: string,
+    @Query('msg_type') msg_type: string,
+  ) {
     return this.appService.getTaskStatus({ roomid, appid, msg_type });
   }
 

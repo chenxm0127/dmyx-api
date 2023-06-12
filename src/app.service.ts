@@ -173,6 +173,14 @@ export class AppService {
     };
   }
   getTaskStatus(_taskReq: TaskStatus) {
+    if (!_taskReq.appid || !_taskReq.msg_type || !_taskReq.roomid) {
+      return {
+        err_no: 40023,
+        err_msg: 'Required Parameters Are Absent',
+        logid: new Date().getTime().toString(),
+        data: {},
+      };
+    }
     console.log(_taskReq);
     return {
       err_no: 0,
