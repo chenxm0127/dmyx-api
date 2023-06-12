@@ -165,7 +165,7 @@ export class AppService {
         data: {
           openId: '',
           userName: '',
-          avatrUrl: '',
+          avatarUrl: '',
           roomId: '',
         },
       };
@@ -177,7 +177,7 @@ export class AppService {
         data: {
           openId: '',
           userName: '',
-          avatrUrl: '',
+          avatarUrl: '',
           roomId: '',
         },
       };
