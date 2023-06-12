@@ -67,8 +67,8 @@ export class AppController {
    */
   @Post('live_data/host/info/get')
   getHostInfo(@Body() req) {
-    const { userid } = req;
-    return this.appService.getHostInfo(userid);
+    const { appid, user_code } = req;
+    return this.appService.getHostInfo(appid, user_code);
   }
 
   /**

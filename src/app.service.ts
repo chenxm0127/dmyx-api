@@ -7,6 +7,27 @@ import {
   TokenType,
 } from './type';
 
+const hostInfo = {
+  usecode001: {
+    roomId: 'gameroom1',
+    openId: 'opid001',
+    userName: '游戏主播1',
+    avatarUrl: '-',
+  },
+  usecode002: {
+    roomId: 'gameroom2',
+    openId: 'opid002',
+    userName: '游戏主播2',
+    avatarUrl: '-',
+  },
+  usecode003: {
+    roomId: 'gameroom3',
+    openId: 'opid003',
+    userName: '游戏主播3',
+    avatarUrl: '-',
+  },
+};
+
 @Injectable()
 export class AppService {
   getHello() {
@@ -135,16 +156,36 @@ export class AppService {
       },
     };
   }
-  getHostInfo(_userid: number) {
-    console.log(_userid);
+  getHostInfo(appid: string, user_code: string) {
+    console.log(appid, user_code);
+    if (appid !== '1234567890abcdef') {
+      return {
+        err_no: 40015,
+        err_msg: 'bad appid',
+        data: {
+          openId: '',
+          userName: '',
+          avatrUrl: '',
+          roomId: '',
+        },
+      };
+    }
+    if (!['usecode001', 'usecode002', 'usecode003'].includes(user_code)) {
+      return {
+        err_no: -1,
+        err_msg: 'unkonw error',
+        data: {
+          openId: '',
+          userName: '',
+          avatrUrl: '',
+          roomId: '',
+        },
+      };
+    }
     return {
       err_no: 0,
       err_msg: 'ok',
-      data: {
-        userName: '游戏主播',
-        channelName: 'yxzb',
-        appid: '0411799bd126418c9ea73cb37f2c40b4',
-      },
+      data: hostInfo[user_code],
     };
   }
   livingMessage(_livingData: LivingData) {
