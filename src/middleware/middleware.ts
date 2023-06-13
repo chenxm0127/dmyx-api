@@ -9,9 +9,14 @@ export class CheckContentTypeMiddleware implements NestMiddleware {
     const contentType = req.header('content-type');
     console.log('-------contentType: ', contentType);
     if (
-      contentType !== 'application/json; charset=utf-8' &&
-      contentType !== 'application/json;charset=utf-8'
+      ![
+        'application/json; charset=utf-8',
+        'application/json;charset=utf-8',
+        'application/json;charset=UTF-8',
+        'application/json; charset=UTF-8',
+      ].includes(contentType)
     ) {
+      console.log('------ddddddddddddddd');
       return res.status(400).json({
         err_no: 40023,
         error: 'Invalid content-type',

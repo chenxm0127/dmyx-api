@@ -263,16 +263,11 @@ export class AppService {
     };
     console.log('------newHeader: ', newHeader);
     console.log('------pushData: ', pushData);
-    /*
-    apiRequest
-      .post('agora/livedata', pushData, { headers: newHeader })
-      .then((response) => {
-        console.log(response.data);
-      });*/
 
     const response = await apiRequest.post('agora/livedata', pushData, {
       headers: newHeader,
     });
+
     console.log('---response data: ', response.data);
     return {
       err_no: response.data && response.data.code,

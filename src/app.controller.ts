@@ -8,7 +8,14 @@ import {
   HttpCode,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { TaskType } from './type';
+const gitffMap = {
+  '1001': 10,
+  '1002': 50,
+  '1003': 1000,
+  '1004': 1,
+  '1005': 5,
+  '1006': 20,
+};
 
 @Controller('api')
 export class AppController {
@@ -112,11 +119,17 @@ export class AppController {
         timestamp: new Date().getTime(),
       };
     } else if (msg_type === 'live_gift') {
+      let giftValue = 0;
+      if (!req.gift_value) {
+        giftValue = Math.floor(req.gift_num * gitffMap[req.gift_id]);
+      } else {
+        giftValue = req.gift_value;
+      }
       msgData = {
         openid: req.openid,
         gift_id: req.gift_id,
         gift_num: req.gift_num,
-        gift_value: req.gift_value,
+        gift_value: giftValue,
         avatar_url: req.avatar_url,
         nickname: req.nickname,
         timestamp: new Date().getTime(),
