@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
-import { generateMessageId } from './util';
+import { generateMessageId, signature } from './util';
+import apiRequest from './request';
 import {
   TaskType,
   TaskDataType,
@@ -230,6 +231,7 @@ export class AppService {
     const msg_id = generateMessageId();
     const liveData = { ..._livingData, msg_id };
     console.log(liveData);
+    
     return {
       err_no: 0,
       err_msg: 'sucess',

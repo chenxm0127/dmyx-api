@@ -2,11 +2,11 @@ import * as crypto from 'crypto';
 /**
  * 生成9位伪随机数
  */
-export function generateRandomNumber(): string {
+export function generateRandomStr(): string {
   let result = '';
-  const characters = '0123456789';
+  const characters = 'qwertyuioplkjhgfdsazxcvbnm';
   const charactersLength = characters.length;
-  for (let i = 0; i < 9; i++) {
+  for (let i = 0; i < 5; i++) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
