@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { generateMessageId, signature } from './util';
+import { generateMessageId, generateRandomString, signature } from './util';
 import apiRequest from './request';
 import {
   TaskType,
@@ -96,8 +96,10 @@ export class AppService {
       data: {},
     };
   }
-  getFailedData(_taskData: TaskDataType) {
+  getFailedData(ismock = 'false', _taskData: TaskDataType) {
     console.log(_taskData);
+    const isMock = ismock.toLowerCase() === 'true';
+    console.log('isMock: ', isMock);
     let payload: any = '';
     if (!_taskData.appid || !_taskData.msg_type || !_taskData.roomid) {
       return {
@@ -155,6 +157,14 @@ export class AppService {
           timestamp: new Date().getTime(),
         },
       ];
+    }
+    if (!isMock) {
+      return {
+        err_no: 0,
+        err_msg: 'sucess',
+        logid: new Date().getTime().toString(),
+        data: {},
+      };
     }
     return {
       err_no: 0,
@@ -227,18 +237,48 @@ export class AppService {
       data: hostInfo[user_code],
     };
   }
-  livingMessage(_livingData: LivingMsgData) {
+  async livingMessage(
+    roomid: string,
+    msg_type: string,
+    _livingData: LivingMsgData,
+  ) {
     const msg_id = generateMessageId();
     const liveData = { ..._livingData, msg_id };
+    console.log(roomid);
+    console.log(msg_type);
     console.log(liveData);
-    
+    const secret = 'agorasecret';
+    const pushData = JSON.stringify([liveData]);
+    const signHeader = {
+      'x-nonce-str': generateRandomString(),
+      'x-timestamp': new Date().getTime().toString(),
+      'x-roomid': roomid,
+      'x-msg-type': msg_type,
+    };
+    const signatureStr = signature(signHeader, pushData, secret);
+    const newHeader = {
+      ...signHeader,
+      'x-signature': signatureStr,
+      'content-type': 'application/json',
+    };
+    console.log('------newHeader: ', newHeader);
+    console.log('------pushData: ', pushData);
+    /*
+    apiRequest
+      .post('agora/livedata', pushData, { headers: newHeader })
+      .then((response) => {
+        console.log(response.data);
+      });*/
+
+    const response = await apiRequest.post('agora/livedata', pushData, {
+      headers: newHeader,
+    });
+    console.log('---response data: ', response.data);
     return {
-      err_no: 0,
-      err_msg: 'sucess',
+      err_no: response.data && response.data.code,
+      err_msg: response.data.message,
       logid: new Date().getTime().toString(),
-      data: {
-        msg_id,
-      },
+      data: response.data.data,
     };
   }
 }

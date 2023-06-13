@@ -61,8 +61,9 @@ export class AppController {
     @Query('msg_type') msg_type: string,
     @Query('page_num') page_num: number,
     @Query('page_size') page_size: number,
+    @Query('ismock') ismock: string,
   ) {
-    return this.appService.getFailedData({
+    return this.appService.getFailedData(ismock, {
       roomid,
       appid,
       msg_type,
@@ -129,6 +130,6 @@ export class AppController {
         timestamp: new Date().getTime(),
       };
     }
-    return this.appService.livingMessage(msgData);
+    return this.appService.livingMessage(req.roomid, req.msg_type, msgData);
   }
 }

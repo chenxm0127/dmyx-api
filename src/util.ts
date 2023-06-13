@@ -2,14 +2,17 @@ import * as crypto from 'crypto';
 /**
  * 生成9位伪随机数
  */
-export function generateRandomStr(): string {
-  let result = '';
-  const characters = 'qwertyuioplkjhgfdsazxcvbnm';
-  const charactersLength = characters.length;
+export function generateRandomString(): string {
+  const letters = 'abcdefghijklmnopqrstuvwxyz';
+  let randomString = '';
+
   for (let i = 0; i < 5; i++) {
-    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    const randomIndex = Math.floor(Math.random() * letters.length);
+    const randomLetter = letters.charAt(randomIndex);
+    randomString += randomLetter;
   }
-  return result;
+
+  return randomString;
 }
 
 export function generateMessageId(): string {

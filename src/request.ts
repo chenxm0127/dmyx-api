@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'http://101.132.105.74:3000/api/';
+const baseUrl = 'https://livedata.pwnk.fun/api/';
 //const baseUrl = 'http://localhost:3000/api/'
 const apiRequest = axios.create({
   baseURL: baseUrl,
