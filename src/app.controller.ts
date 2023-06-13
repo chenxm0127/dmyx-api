@@ -1,4 +1,12 @@
-import { Controller, Get, Post, Body, Header, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Header,
+  Query,
+  HttpCode,
+} from '@nestjs/common';
 import { AppService } from './app.service';
 import { TaskType } from './type';
 
@@ -16,6 +24,7 @@ export class AppController {
    */
   @Post('live_data/token/get')
   @Header('Content-Type', 'application/json')
+  @HttpCode(200)
   getAccessToken(@Body() req) {
     const { appid, secret, grant_type } = req;
     return this.appService.getAccessToken({ appid, secret, grant_type });
@@ -25,6 +34,7 @@ export class AppController {
    * 开启直播业务
    */
   @Post('live_data/task/start')
+  @HttpCode(200)
   startPushTask(@Body() req) {
     const { roomid, appid, msg_type } = req;
     return this.appService.startPushTask({ roomid, appid, msg_type });
@@ -34,6 +44,7 @@ export class AppController {
    * 停止直播业务
    */
   @Post('live_data/task/stop')
+  @HttpCode(200)
   stopPushTask(@Body() req) {
     const { roomid, appid, msg_type } = req;
     return this.appService.stopPushTask({ roomid, appid, msg_type });
@@ -43,6 +54,7 @@ export class AppController {
    * 失败消息数据获取
    */
   @Get('live_data/fail_data/get')
+  @HttpCode(200)
   getFailedData(
     @Query('roomid') roomid: string,
     @Query('appid') appid: string,
@@ -63,6 +75,7 @@ export class AppController {
    * 获取任务状态
    */
   @Get('live_data/task/get')
+  @HttpCode(200)
   getTaskStatus(
     @Query('roomid') roomid: string,
     @Query('appid') appid: string,
@@ -75,6 +88,7 @@ export class AppController {
    * 获取主播信息
    */
   @Post('live_data/host/info/get')
+  @HttpCode(200)
   getHostInfo(@Body() req) {
     const { appid, user_code } = req;
     return this.appService.getHostInfo(appid, user_code);
@@ -84,37 +98,35 @@ export class AppController {
    * 推送消息回调
    */
   @Post('live_data/living/message')
+  @HttpCode(200)
   livingMessage(@Body() req) {
     const { msg_type } = req;
     let msgData;
     if (msg_type === 'live_comment') {
       msgData = {
-        msgid: req.msgid, //id
-        userid: req.userid,
+        openid: req.openid,
         content: req.content,
-        avatarurl: req.avatarurl,
+        avatar_url: req.avatarurl,
         nickname: req.nickname,
-        timestamp: new Date(),
+        timestamp: new Date().getTime(),
       };
     } else if (msg_type === 'live_gift') {
       msgData = {
-        msgid: req.msgid, //id
-        userid: req.userid,
-        giftid: req.giftid,
-        giftnum: req.giftnum,
-        giftvalue: req.giftvalue,
-        avatarurl: req.avatarurl,
+        openid: req.openid,
+        gift_id: req.gift_id,
+        gift_num: req.gift_num,
+        gift_value: req.gift_value,
+        avatar_url: req.avatar_url,
         nickname: req.nickname,
-        timestamp: new Date(),
+        timestamp: new Date().getTime(),
       };
     } else if (msg_type === 'live_like') {
       msgData = {
-        msgid: req.msgid, //id
-        userid: req.userid,
-        likenum: req.likenum,
-        avatarurl: req.avatarurl,
+        openid: req.openid,
+        like_num: req.likenum,
+        avatar_url: req.avatarurl,
         nickname: req.nickname,
-        timestamp: new Date(),
+        timestamp: new Date().getTime(),
       };
     }
     return this.appService.livingMessage(msgData);

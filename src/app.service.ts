@@ -3,9 +3,9 @@ import { generateMessageId } from './util';
 import {
   TaskType,
   TaskDataType,
-  LivingData,
   TaskStatus,
   TokenType,
+  LivingMsgData,
 } from './type';
 
 const hostInfo = {
@@ -226,13 +226,17 @@ export class AppService {
       data: hostInfo[user_code],
     };
   }
-  livingMessage(_livingData: LivingData) {
-    console.log(_livingData);
+  livingMessage(_livingData: LivingMsgData) {
+    const msg_id = generateMessageId();
+    const liveData = { ..._livingData, msg_id };
+    console.log(liveData);
     return {
       err_no: 0,
       err_msg: 'sucess',
       logid: new Date().getTime().toString(),
-      data: {},
+      data: {
+        msg_id,
+      },
     };
   }
 }

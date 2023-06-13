@@ -25,35 +25,35 @@ export interface TaskDataType {
 }
 
 type Commit = {
-  msgid: string; //id
-  userid: number;
+  msg_id: string; //id
+  openid: string;
   content: string;
-  avatarurl: string; //
+  avatar_url: string; //
   nickname: string;
   timestamp: number; // UTC
 };
 
 type Gift = {
-  msgid: string; //id
-  userid: number;
-  giftid: string;
-  giftnum: number;
-  giftvalue: number;
-  avatarurl: string; //
+  msg_id: string; //id
+  openid: string;
+  gift_id: string;
+  gift_num: number;
+  gift_value: number;
+  avatar_url: string; //
   nickname: string;
   timestamp: number; // UTC
 };
 
 type Like = {
-  msgid: string; //id
-  userid: number;
-  likenum: string;
-  avatarurl: string; //
+  msg_id: string; //id
+  openid: number;
+  like_num: string;
+  avatar_url: string; //
   nickname: string;
   timestamp: number; // UTC
 };
 
-export interface LivingData {
+export interface LivingMsgData {
   msg_type: string;
   data: Commit | Gift | Like;
 }
